@@ -33,14 +33,6 @@ class Snake:
         """Calls add_segment to add segment to snake. Called when snake collides with food"""
         self.add_segment(self.segments[-1].position())
 
-    def reset(self):
-        """Resets snake after collision"""
-        for seg in self.segments:
-            seg.goto(1000, 1000)
-        self.segments.clear()
-        self.create_snake()
-        self.head = self.segments[0]
-
     # Snake Move #
     def move(self):
         """Starts Snake's perpetual forward movement"""
@@ -49,6 +41,14 @@ class Snake:
             new_y = self.segments[seg - 1].ycor()
             self.segments[seg].goto(new_x, new_y)
         self.head.forward(MOVE_DISTANCE)
+
+    def reset(self):
+        """Resets snake to starting position. Called after play_again"""
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
 
     # Snake Movement Keys #
     def up(self):
